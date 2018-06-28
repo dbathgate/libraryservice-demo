@@ -1,16 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('Build'){
-            steps {
-                script {
-                    env.GOPATH = "${env.HOME}/go"
-                }
-                sh "make docker-build-deps"
-                sh "make docker-build"
-            }
-        }
-        stage('Docker Image'){
+        stage('Build / Docker Image'){
             steps {
                 sh "docker build -t library-service:${env.BUILD_ID} ."
             }
