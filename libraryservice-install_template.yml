@@ -18,7 +18,7 @@ spec:
         image: localhost:5000/library-service:%%BUILD_NUMBER%%
         imagePullPolicy: IfNotPresent
         ports:
-        - name: libraryservice-api
+        - name: library-api
           containerPort: 8080
         env:
         - name: GO_ARGS
