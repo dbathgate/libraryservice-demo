@@ -6,8 +6,8 @@ pipeline {
                 script {
                     env.GOPATH = "${env.HOME}/go"
                 }
-                sh "make deps"
-                sh "make build-linux"
+                sh "make docker-build-deps"
+                sh "make docker-build"
             }
         }
         stage('Docker Image'){
