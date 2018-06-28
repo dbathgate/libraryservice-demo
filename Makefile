@@ -33,7 +33,7 @@ docker-build-deps:
 	docker build -t $(DOCKER_BUILD_IMAGE) -f build.Dockerfile .
 docker-build:
 	mkdir -p build
-	docker run --rm -v "$$PWD:/go/src/library-service" -it $(DOCKER_BUILD_IMAGE) go build -o "build/$(BINARY_UNIX)" $(MAIN_GO_FILE)
+	docker run --rm -v "$$PWD:/go/src/library-service" $(DOCKER_BUILD_IMAGE) go build -o "build/$(BINARY_UNIX)" $(MAIN_GO_FILE)
 docker-build-image: docker-build
 	docker build -t $(DOCKER_IMAGE_TAG) .
     
