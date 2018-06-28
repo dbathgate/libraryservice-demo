@@ -28,7 +28,7 @@ deps:
 	$(GOGET) gopkg.in/yaml.v2
 build-linux:
 	mkdir -p build
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o "build/$(BINARY_UNIX)" $(MAIN_GO_FILE)
+    $(GOBUILD) -o "build/$(BINARY_UNIX)" $(MAIN_GO_FILE)
 docker-build-deps:
 	docker build -t $(DOCKER_BUILD_IMAGE) -f build.Dockerfile .
 docker-build:
