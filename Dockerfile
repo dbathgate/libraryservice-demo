@@ -1,8 +1,20 @@
+FROM golang:1.10-alpine as builder
+
+RUN apk --update upgrade \
+ && apk --no-cache --no-progress add make git \
+ && rm -rf /var/cache/apk/*
+
+WORKDIR /go/src/library-service
+COPY . /go/src/library-service
+
+RUN ["make", "deps"]
+RUN ["make", "build-linux"]
+
 FROM alpine
 
-COPY ./build/libraryservice_unix /libraryservice
-COPY ./config/config-docker.yml /config.yml
-COPY ./run.sh /run.sh
+COPY --from=builder /go/src/library-service/libraryservice_unix /libraryservice
+COPY --from=builder /go/src/library-service/config/config-docker.yml /config.yml
+COPY --from=builder /go/src/library-service/run.sh /run.sh
 
 RUN chmod +x /libraryservice \
  && chmod +x /run.sh

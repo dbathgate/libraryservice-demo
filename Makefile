@@ -27,13 +27,12 @@ deps:
 	$(GOGET) github.com/prometheus/client_golang/prometheus
 	$(GOGET) gopkg.in/yaml.v2
 build-linux:
-	mkdir -p build
-	$(GOBUILD) -o "build/$(BINARY_UNIX)" $(MAIN_GO_FILE)
+	$(GOBUILD) -o "$(BINARY_UNIX)" $(MAIN_GO_FILE)
 docker-build-deps:
 	docker build -t $(DOCKER_BUILD_IMAGE) -f build.Dockerfile .
 docker-build:
 	mkdir -p build
 	docker run --rm -v "$$PWD:/go/src/library-service" $(DOCKER_BUILD_IMAGE) go build -o "build/$(BINARY_UNIX)" $(MAIN_GO_FILE)
-docker-build-image: docker-build
+docker-build-image:
 	docker build -t $(DOCKER_IMAGE_TAG) .
     
