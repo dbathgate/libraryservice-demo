@@ -1,0 +1,5 @@
+server:
+  port: 7080
+
+bookservice:
+  host: http://bookservice:8080

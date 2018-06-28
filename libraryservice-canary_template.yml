@@ -1,0 +1,32 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: libraryservice
+spec:
+  host: libraryservice
+  subsets:
+  - name: blue
+    labels:
+      version: "%%BLUE_VERSION%%"
+  - name: green
+    labels:
+      version: "%%GREEN_VERSION%%"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: libraryservice
+spec:
+  hosts:
+  - libraryservice
+  http:
+  - route:
+    - destination:
+        host: libraryservice
+        subset: blue
+      weight: %%BLUE_PERCENT%%
+    - destination:
+        host: libraryservice
+        subset: green
+      weight: %%GREEN_PERCENT%%

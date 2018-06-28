@@ -1,0 +1,25 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bookservice-%%BUILD_NUMBER%%
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bookservice
+        version: %%BUILD_NUMBER%%
+      annotations:
+        prometheus.io/scrape: true
+    spec:
+      containers:
+      - name: details
+        image: localhost:5000/book-service:%%BUILD_NUMBER%%
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: bookservice-api
+          containerPort: 8080
+        env:
+        - name: JVM_ARGS
+          value: -Dapp.version=%%BUILD_NUMBER%%

@@ -1,0 +1,24 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: bookservice
+spec:
+  host: bookservice
+  subsets:
+  - name: blue
+    labels:
+      version: "%%BUILD_NUMBER%%"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: bookservice
+spec:
+  hosts:
+  - bookservice
+  http:
+  - route:
+    - destination:
+        host: bookservice
+        subset: blue
