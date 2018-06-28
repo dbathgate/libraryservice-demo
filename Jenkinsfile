@@ -4,7 +4,7 @@ pipeline {
         stage('Build'){
             steps {
                 script {
-                    env.GOPATH= ="${env.HOME}/go"
+                    env.GOPATH = "${env.HOME}/go"
                 }
                 sh "make deps"
                 sh "make build-linux"
