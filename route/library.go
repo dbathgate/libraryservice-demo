@@ -12,10 +12,10 @@ import (
 )
 
 type Book struct {
-	Id     string   `json:"id"`
-	Title  string   `json:"title"`
-	Author string   `json:"author`
-	Genre  []string `json:"genre"`
+	Id       string   `json:"id"`
+	Title    string   `json:"title"`
+	Author   string   `json:"author`
+	Category []string `json:"category"`
 }
 
 type Library struct {
