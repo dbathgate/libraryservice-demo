@@ -14,7 +14,7 @@ import (
 type Book struct {
 	Id       string   `json:"id"`
 	Title    string   `json:"title"`
-	Author   string   `json:"author`
+	Author   string   `json:"author"`
 	Category []string `json:"category"`
 }
 
